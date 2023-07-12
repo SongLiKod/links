@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(to right, rgb(106, 17, 203) 0%, rgb(37, 117, 252) 100%);
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .category {
+            margin-top: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-title {
+            text-align: center;
+            font-size: 24px;
+            color: #333333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .link {
+            margin: 10px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .link:hover {
+            transform: scale(1.1);
+        }
+
+        .link a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .toggle-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            background-color: #ccc;
+            border-radius: 34px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: .4s;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: #2196F3;
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .theme-button {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-button.blue {
+            background-color: #2196F3;
+        }
+
+        .theme-button.purple {
+            background-image: linear-gradient(to top, rgb(196, 113, 245) 0%, rgb(250, 113, 205) 100%);
+        }
+
+        .theme-button.green {
+            background-image: linear-gradient(to top, rgb(255, 5, 124) 0%, rgb(124, 100, 213) 48%, rgb(76, 195, 255) 100%);
+        }
+
+        .theme-button.black {
+            background-color: #000000;
+        }
+
+        .theme-button.theme3 {
+            background-image: linear-gradient(to top, rgb(35, 21, 87) 0%, rgb(68, 16, 122) 29%, rgb(255, 19, 97) 67%, rgb(255, 248, 0) 100%);
+        }
+
+        @media only screen and (max-width: 100%) {
+            .category {
+                margin-top: 20px;
+                padding: 10px;
+            }
+
+            .category-title {
+                font-size: 18px;
+            }
+
+            .link {
+                margin: 5px;
+                padding: 5px;
+            }
+        }
+
+        /* 添加夜晚模式 */
+        .night-mode {
+            background-image: linear-gradient(to top, rgb(255, 5, 124) 0%, rgb(124, 100, 213) 48%, rgb(76, 195, 255) 100%);
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+            color: #ffffff;
+        }
+
+        .night-mode .category {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .night-mode .category-title {
+            color: #ffffff;
+        }
+
+        .night-mode .link {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .night-mode .link a {
+            color: #ffffff;
+        }
+
+        /* 添加模式1 */
+        .purple-mode {
+            background-image: linear-gradient(to top, rgb(196, 113, 245) 0%, rgb(250, 113, 205) 100%);
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+            color: #ffffff;
+        }
+
+        .purple-mode .category {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .purple-mode .category-title {
+            color: #ffffff;
+        }
+
+        .purple-mode .link {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .purple-mode .link a {
+            color: #ffffff;
+        }
+
+        /* 添加模式2 */
+        .black-mode {
+            background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+            color: #ffffff;
+        }
+
+        .black-mode .category {
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.9);
+        }
+
+        .black-mode .category-title {
+            color: #eeeeee;
+        }
+
+        .black-mode .link {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.9);
+        }
+
+        .black-mode .link a {
+            color: #eeeeee;
+        }
+
+        /* 模式3 */
+        .theme3-mode {
+            background-image: linear-gradient(to top, rgb(35, 21, 87) 0%, rgb(68, 16, 122) 29%, rgb(255, 19, 97) 67%, rgb(255, 248, 0) 100%);
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+            color: #ffffff;
+        }
+
+        .theme3-mode .category {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .theme3-mode .category-title {
+            color: #ffffff;
+        }
+
+        .theme3-mode .link {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .theme3-mode .link a {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Tools</h1>
+
+        <div class="toggle-container">
+            <div class="theme-button blue" onclick="changeTheme('blue-mode')"></div>
+            <div class="theme-button purple" onclick="changeTheme('purple-mode')"></div>
+            <div class="theme-button green" onclick="changeTheme('night-mode')"></div>
+            <div class="theme-button theme3" onclick="changeTheme('theme3-mode')"></div>
+            <div class="theme-button black" onclick="changeTheme('black-mode')"></div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">SSH</h2>
+            <div class="links">
+                <div class="link"><a href="https://ssh.hax.co.id/" target="_blank" title="web ssh">hax(ipv6 only)</a>
+                </div>
+                <div class="link"><a href="https://ssh.vps.vc/" target="_blank" title="web ssh">vc(ipv6 only)</a></div>
+                <div class="link"><a href="https://ssh.misaka.rest/" target="_blank" title="web ssh">msk</a></div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">文档</h2>
+            <div class="links">
+                <div class="link"><a href="https://shimo.im/" target="_blank"
+                        title="个人版有1G空间">石墨</a></div>
+                
+                <div class="link"><a href="https://docs.google.com/" target="_blank"
+                    title="个人版有15G空间">Google 文档</a></div>
+                
+                <div class="link"><a href="https://www.kdocs.cn/" target="_blank"
+                    title="个人版有1G空间">金山文档</a></div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">AI</h2>
+            <div class="links">
+                <div class="link"><a href="https://clipdrop.co/" target="_blank" title="免费生成图片，去除文字背景">Clipdrop</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">软件</h2>
+            <div class="links">
+                <div class="link"><a href="https://github.com/adil192/saber" target="_blank" title="A (work-in-progress) cross-platform libre handwritten notes app">saber</a></div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">网站</h2>
+            <div class="links">
+                <div class="link"><a href="https://www.noip.com/" target="_blank"
+                        title="免费注册1个域名，每30天需要confirm">no.ip</a></div>
+
+                <div class="link"><a href="https://www.dynadot.com/" target="_blank"
+                    title="免费注册1个域名，不需要信用卡，白嫖1年.link域名">dynadot</a></div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">网络工具</h2>
+            <div class="links">
+                <div class="link"><a href="https://ip.skk.moe/" target="_blank"
+                        title="显示本机ip地址分流信息">本机ip地址信息</a></div>
+                
+                <div class="link"><a href="https://ip.gs/" target="_blank"
+                    title="显示是否支持ipv6">是否支持ipv6</a></div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">邮箱</h2>
+            <div class="links">
+                <div class="link"><a href="https://etempmail.com/" target="_blank"
+                        title="用来注册并获取需要教育邮箱才能获取的福利">临时教育邮箱</a></div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">V</h2>
+            <div class="links">
+                <div class="link"><a href="https://getafreenode.com/" target="_blank" title="getafreenode">Get A Free
+                        Node</a></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMode() {
+            const body = document.querySelector('body');
+            const toggleSwitch = document.getElementById('toggleMode');
+            const categories = document.querySelectorAll('.category');
+            const links = document.querySelectorAll('.link');
+
+            if (toggleSwitch.checked) {
+                body.classList.add('night-mode');
+                categories.forEach(category => category.classList.toggle('night-mode'));
+                links.forEach(link => link.classList.toggle('night-mode'));
+            } else {
+                body.classList.remove('night-mode');
+                categories.forEach(category => category.classList.remove('night-mode'));
+                links.forEach(link => link.classList.remove('night-mode'));
+            }
+        }
+
+        function changeTheme(theme) {
+            const body = document.querySelector('body');
+            const categories = document.querySelectorAll('.category');
+            const links = document.querySelectorAll('.link');
+
+            removeThemes(body);
+            categories.forEach(element => {
+                removeThemes(element);
+            });
+            links.forEach(element => {
+                removeThemes(element);
+            });
+            if (theme === 'blue-mode') {
+                body.style.setProperty('--primary-color', '#2196F3');
+            } else if (theme === 'purple-mode') {
+                body.classList.add('purple-mode');
+                categories.forEach(category => category.classList.toggle('purple-mode'));
+                links.forEach(link => link.classList.toggle('purple-mode'));
+                localStorage.setItem(key, 'purple-mode');
+            } else if (theme === 'night-mode') {
+                body.classList.add('night-mode');
+                categories.forEach(category => category.classList.toggle('night-mode'));
+                links.forEach(link => link.classList.toggle('night-mode'));
+                localStorage.setItem(key, 'night-mode');
+            } else if (theme === 'black-mode') {
+                body.classList.add('black-mode');
+                categories.forEach(category => category.classList.toggle('black-mode'));
+                links.forEach(link => link.classList.toggle('black-mode'));
+                localStorage.setItem(key, 'black-mode');
+            } else if (theme === 'theme3-mode') {
+                body.classList.add('theme3-mode');
+                categories.forEach(category => category.classList.toggle('theme3-mode'));
+                links.forEach(link => link.classList.toggle('theme3-mode'));
+                localStorage.setItem(key, 'theme3-mode');
+            }
+        }
+
+
+        function removeThemes(element, themes) {
+            var themes = ["purple-mode", "night-mode", "black-mode", "theme3-mode"];
+            themes.forEach(theme => {
+                element.classList.remove(theme);
+            });
+        }
+
+
+        const key = 'leel.tools.theme';
+        const value = localStorage.getItem(key);
+        if (value != undefined) {
+            changeTheme(value);
+        }
+    </script>
+</body>
+
+</html>
